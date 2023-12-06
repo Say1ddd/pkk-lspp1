@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Admin Inventory - Kategori')
+
 @section('content')
     <div class="container">
         <div class="row">
@@ -32,16 +34,12 @@
                                     <option value="BTHP" {{ (old('kategori', $kategori->kategori) == 'BTHP') ? 'selected' : '' }}>BTHP</option>
                                 </select>
                                                                                              
-                            
-                                <!-- error message for kategori_id -->
-                                <!-- error message for kategori -->
                                 @error('kategori')
                                     <div class="alert alert-danger mt-2">
                                         {{ $message }}
                                     </div>
                                 @enderror
                             </div>
-                            
 
                             <button type="submit" class="btn btn-md btn-primary">SIMPAN</button>
                             <button type="reset" class="btn btn-md btn-warning">RESET</button>
