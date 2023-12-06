@@ -12,7 +12,9 @@ class BarangKeluarController extends Controller
      */
     public function index()
     {
-        //
+        $barangKeluar = BarangKeluar::all();
+
+        return view('barangkeluar.index', compact('barangKeluar'));
     }
 
     /**
@@ -34,7 +36,7 @@ class BarangKeluarController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(BarangKeluar $barangKeluar)
+    public function show(BarangKeluar $BarangKeluar)
     {
         //
     }
@@ -42,7 +44,7 @@ class BarangKeluarController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(BarangKeluar $barangKeluar)
+    public function edit(BarangKeluar $BarangKeluar)
     {
         //
     }
@@ -50,7 +52,7 @@ class BarangKeluarController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, BarangKeluar $barangKeluar)
+    public function update(Request $request, BarangKeluar $BarangKeluar)
     {
         //
     }
@@ -58,8 +60,16 @@ class BarangKeluarController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(BarangKeluar $barangKeluar)
+    public function destroy($id)
     {
-        //
+        $barangKeluar = BarangKeluar::find($id);
+
+        if (!$barangKeluar) {
+            return redirect()->route('barangkeluar.index')->with('error', 'Record not found.');
+        }
+
+        $barangKeluar->delete();
+
+        return redirect()->route('barangkeluar.index')->with('success', 'Record deleted successfully.');
     }
 }

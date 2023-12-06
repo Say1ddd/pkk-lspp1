@@ -51,18 +51,29 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item {{ request()->is('barang*') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('barang.index') }}">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                    aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fa fa-user-circle" aria-hidden="true"></i>
                     <span>Barang</span>
                 </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Barang Inventory:</h6>
+                        <a class="collapse-item" href="{{ route('barang.index') }}">Barang</a>
+                        <a class="collapse-item" href="{{ route('barangmasuk.index') }}">Barang Masuk</a>
+                        <a class="collapse-item" href="{{ route('barangkeluar.index') }}">Barang Keluar</a>
+                    </div>
+                </div>
             </li>
-
+            
+            
+            
             <li class="nav-item {{ request()->is('kategori*') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('kategori.index') }}">
                     <i class="fa fa-user-circle" aria-hidden="true"></i>
                     <span>Kategori</span>
                 </a>
-            </li>
+            </li>            
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">

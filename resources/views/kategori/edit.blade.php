@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Admin Inventory - Kategori')
+@section('title', 'Admin Inventory - Edit Kategori')
 
 @section('content')
     <div class="container">

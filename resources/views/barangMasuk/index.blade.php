@@ -1,62 +1,58 @@
 @extends('layouts.app')
 
-@section('title', 'Admin Inventory - Barang')
+@section('title', 'Admin Inventory - Barang Masuk')
 
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-body text-center">
-                        <a href="{{ route('barang.create') }}" class="btn btn-md btn-success">TAMBAH BARANG</a>
-                    </div>
+                    {{-- <div class="card-body text-center">
+                        <a href="{{ route('barangmasuk.create') }}" class="btn btn-md btn-success">TAMBAH BARANG</a>
+                    </div> --}}
                 </div>
 
+                @if(count($barangMasuk) > 0)
                 <table class="table table-bordered">
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>MERK</th>
-                            <th>SERI</th>
-                            <th>SPESIFIKASI</th>
-                            <th>STOK</th>
-                            <th>KATEGORI</th>
+                            <th>TANGGAL MASUK</th>
+                            <th>JUMLAH MASUK</th>
+                            <th>NAMA BARANG</th>
                             <th style="width: 15%">AKSI</th>
 
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($Barang as $barang)
+                        @foreach ($barangMasuk as $barangmasuk)
                             <tr>
-                                <td>{{ $barang->id  }}</td>
-                                <td>{{ $barang->merk  }}</td>
-                                <td>{{ $barang->seri  }}</td>
-                                <td>{{ $barang->spesifikasi  }}</td>
-                                <td>{{ $barang->stok  }}</td>
-                                <td>{{ $barang->kategori_id  }}</td>
+                                <td>{{ $barangmasuk->id  }}</td>
+                                <td>{{ $barangmasuk->tgl_masuk  }}</td>
+                                <td>{{ $barangmasuk->qty_masuk  }}</td>
+                                <td>{{ $barangmasuk->barang->merk }}</td>
                                 
                                 <td class="text-center"> 
-                                    <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('barang.destroy', $barang->id) }}" method="POST">
-                                        <a href="{{ route('barang.show', $barang->id) }}" class="btn btn-sm btn-dark"><i class="fa fa-eye"></i></a>
-                                        <a href="{{ route('barang.edit', $barang->id) }}" class="btn btn-sm btn-primary"><i class="fa fa-pencil-alt"></i></a>
+                                    <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('barangmasuk.destroy', $barangmasuk->id) }}" method="POST">
+                                        {{-- <a href="{{ route('barangmasuk.show', $barangmasuk->id) }}" class="btn btn-sm btn-dark"><i class="fa fa-eye"></i></a>
+                                        <a href="{{ route('barangmasuk.edit', $barangmasuk->id) }}" class="btn btn-sm btn-primary"><i class="fa fa-pencil-alt"></i></a> --}}
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
                                     </form>
                                 </td>
-                                
                             </tr>
-                        @empty
-                            <div class="alert">
-                                Data barang belum tersedia
-                            </div>
-                        @endforelse
+                        @endforeach
                     </tbody>
-                    
                 </table>
-                {{-- {{ $barang->links() }} --}}
+                {{-- {{ $barangkeluar->links() }} --}}
+            @else
+                <div class="alert">
+                    Data <strong>Barang Masuk</strong> kosong.
+                </div>
+            @endif
 
-            </div>
         </div>
     </div>
+</div>
 @endsection

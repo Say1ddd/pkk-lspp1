@@ -12,8 +12,9 @@ class BarangMasukController extends Controller
      */
     public function index()
     {
-        $barangMasuk = BarangMasuk::latest()->paginate(10);
-        return view('barangMasuk.index', compact('BarangMasuk'));
+        $barangMasuk = BarangMasuk::all();
+
+        return view('barangmasuk.index', compact('barangMasuk'));
     }
 
     /**
@@ -21,7 +22,7 @@ class BarangMasukController extends Controller
      */
     public function create()
     {
-        return view('barangMasuk.create');
+        //
     }
 
     /**
@@ -29,61 +30,46 @@ class BarangMasukController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'tgl_masuk'     => 'required',
-            'qty_masuk'     => 'required',
-            'barang_id'     => 'required',
-        ]);
-
-        BarangMasuk::create($request->all());
-
-        // Redirect to index
-        return redirect()->route('barangMasuk.index')->with(['success' => 'Data Berhasil Disimpan!']);
+        //
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(BarangMasuk $barangmasuk)
+    public function show(BarangMasuk $BarangMasuk)
     {
-        // Return view
-        return view('barangMasuk.show', compact('BarangMasuk'));
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(BarangMasuk $barangmasuk)
+    public function edit(BarangMasuk $BarangMasuk)
     {
-        // Return view for edit form
-        return view('barangMasuk.edit', compact('BarangMasuk'));
+        //
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, BarangMasuk $barangmasuk)
+    public function update(Request $request, BarangMasuk $BarangMasuk)
     {
-        $this->validate($request, [
-            'tgl_masuk'         => 'required',
-            'qty_masuk'         => 'required',
-            'barang_id'         => 'required',
-        ]);
-
-        $barangmasuk->update($request->all());
-
-        // Redirect to index
-        return redirect()->route('barangMasuk.index')->with(['success' => 'Data Berhasil Diubah!']);
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(BarangMasuk $barangmasuk)
+    public function destroy($id)
     {
-        $barangmasuk->delete();
+        $barangMasuk = BarangMasuk::find($id);
 
-        // Redirect to index
-        return redirect()->route('barangMasuk.index')->with(['success' => 'Data Berhasil Dihapus!']);
+        if (!$barangMasuk) {
+            return redirect()->route('barangmasuk.index')->with('error', 'Record not found.');
+        }
+
+        $barangMasuk->delete();
+
+        return redirect()->route('barangmasuk.index')->with('success', 'Record deleted successfully.');
     }
 }
