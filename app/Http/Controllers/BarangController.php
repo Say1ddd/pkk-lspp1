@@ -33,7 +33,7 @@ class BarangController extends Controller
             'merk'         => 'required',
             'seri'         => 'required',
             'spesifikasi'  => 'required',
-            'stok'         => 'required',
+            'stok'         => 'nullable|required',
             'kategori_id'  => 'required',
         ]);
 
