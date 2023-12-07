@@ -27,7 +27,7 @@
                             </tr>
                             <tr>
                                 <td>Kategori</td>
-                                <td>{{ $barang->kategori_id }}</td>
+                                <td>{{ $barang->kategori->kategori }}</td>
                             </tr>
                         </table>
                     </div>

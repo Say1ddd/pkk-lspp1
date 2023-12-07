@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Barang;
+use App\Models\Kategori;
+use Illuminate\Http\Request;
 
 class BarangController extends Controller
 {
@@ -12,7 +13,7 @@ class BarangController extends Controller
      */
     public function index()
     {
-        $Barang = Barang::latest()->paginate(10);
+        $Barang = Barang::all();
         return view('barang.index', compact('Barang'));
     }
 
@@ -21,7 +22,8 @@ class BarangController extends Controller
      */
     public function create()
     {
-        return view('barang.create');
+        $Kategori = Kategori::all();
+        return view('barang.create',compact('Kategori'));
     }
 
     /**
@@ -38,8 +40,6 @@ class BarangController extends Controller
         ]);
 
         Barang::create($request->all());
-
-        // Redirect to index
         return redirect()->route('barang.index')->with(['success' => 'Data Berhasil Disimpan!']);
     }
 
@@ -57,8 +57,8 @@ class BarangController extends Controller
      */
     public function edit(Barang $barang)
     {
-        // Return view for edit form
-        return view('barang.edit', compact('barang'));
+        $Kategori = Kategori::all();
+        return view('barang.edit', compact('barang','Kategori'));
     }
 
     /**
