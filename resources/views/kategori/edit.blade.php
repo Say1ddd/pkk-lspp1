@@ -14,7 +14,7 @@
 
                             <div class="form-group">
                                 <label class="font-weight-bold">DESKRIPSI</label>
-                                <input type="text" class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi" value="{{ old('deskripsi',$kategori->deskripsi) }}" placeholder="Masukkan deskripsi Siswa">
+                                <input type="text" class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi" value="{{ old('deskripsi',$kategori->deskripsi) }}">
                             
                                 <!-- error message untuk deskripsi -->
                                 @error('deskripsi')

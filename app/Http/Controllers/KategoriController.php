@@ -14,54 +14,10 @@ class KategoriController extends Controller
      */
     public function index()
     {
-         //Memanggil store procedure : OK
-         //return DB::select('CALL getKategoriAll');
 
         $Kategori = Kategori::latest()->paginate(10);
-        // $kategori = Kategori::find(1)->barangs();
 
-        // dd($kategori);
-        // return $kategori->all();
-
-        // $kategori = DB::table('kategori')->paginate(2);
-
-        // $kategori = DB::table('kategori')
-        //     ->select('id','kategori', 'jenis')
-        //     ->paginate(2);
-
-
-        // $kategori = Kategori::select('id','deskripsi','kategori',
-        //     \DB::raw('(CASE
-        //         WHEN kategori = "M" THEN "Modal"
-        //         WHEN kategori = "A" THEN "Alat"
-        //         WHEN kategori = "BHP" THEN "Bahan Habis Pakai"
-        //         ELSE "Bahan Tidak Habis Pakai"
-        //         END) AS ketKategori'))
-        //     ->paginate(2);
-        // //  OK
-
-        // $kategori = DB::select('CALL getKategoriAll()','ketKategori("M")');
-        // $kategori = DB::raw("SELECT ketKategori("M") as someValue') ;
-
-        // $kategori = DB::table('kategori')
-        //      ->select('id','deskripsi',DB::raw('ketKategori(kategori) as ketkategori'))
-        //      ->get();
-
-       // return $kategori;
-
-
-        // $kategori = DB::table('kategori')
-        //                 ->select('id','deskripsi',DB::raw('ketKategori(kategori) as ketkategori'))->paginate(1);
-
-
-
-         return view('kategori.index',compact('Kategori'));
-
-        // $kategori = Kategori::all();
-        // return view('kategori.relasi', compact('rsetKategori'));
-
-
-
+        return view('kategori.index',compact('Kategori'));
         return DB::table('kategori')->get();
 
     }
@@ -92,11 +48,7 @@ class KategoriController extends Controller
             'kategori'     => 'required | in:M,A,BHP,BTHP',
         ]);
 
-
-        //create post
         Kategori::create($request->all());
-
-        //redirect to index
         return redirect()->route('kategori.index')->with(['success' => 'Data Berhasil Disimpan!']);
     }
 
@@ -106,15 +58,6 @@ class KategoriController extends Controller
     public function show(string $id)
     {
         $kategori = Kategori::find($id);
-
-        // $kategori = Kategori::select('id','deskripsi','kategori',
-        //     \DB::raw('(CASE
-        //         WHEN kategori = "M" THEN "Modal"
-        //         WHEN kategori = "A" THEN "Alat"
-        //         WHEN kategori = "BHP" THEN "Bahan Habis Pakai"
-        //         ELSE "Bahan Tidak Habis Pakai"
-        //         END) AS ketKategori'))->where('id', '=', $id);
-
         return view('kategori.show', compact('kategori'));
     }
 
@@ -124,8 +67,6 @@ class KategoriController extends Controller
     public function edit(Kategori $kategori)
     {
         $categories = Kategori::all();
-
-        // Return view for edit form with categories
         return view('kategori.edit', compact('kategori', 'categories'));
     }
 
@@ -140,8 +81,6 @@ class KategoriController extends Controller
         ]);
     
         $kategori->update($request->all());
-    
-        // Redirect to index
         return redirect()->route('kategori.index')->with(['success' => 'Data Berhasil Diubah!']);
     }
 
@@ -151,8 +90,6 @@ class KategoriController extends Controller
     public function destroy(Kategori $kategori)
     {
         $kategori->delete();
-
-        // Redirect to index
         return redirect()->route('kategori.index')->with(['success' => 'Data Berhasil Dihapus!']);
     }
 }

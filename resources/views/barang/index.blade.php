@@ -7,7 +7,9 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
-                    <a href="{{ route('barang.create') }}" class="btn btn-md btn-success">TAMBAH BARANG</a>
+                    <div class="card-body text-center">
+                        <a href="{{ route('barang.create') }}" class="btn btn-md btn-success">TAMBAH BARANG</a>
+                    </div>
                 </div>
 
                 @if(count($Barang) > 0)

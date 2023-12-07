@@ -11,6 +11,7 @@ class BarangMasuk extends Model
     use HasFactory;
 
     protected $table = 'barang_masuk';
+    protected $primaryKey = 'id';
     protected $fillable = [
         'tgl_masuk',
         'qty_masuk',

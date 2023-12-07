@@ -14,7 +14,7 @@
 
                             <div class="form-group">
                                 <label class="font-weight-bold">MERK</label>
-                                <input type="text" class="form-control @error('merk') is-invalid @enderror" name="merk" value="{{ old('merk',$barang->merk) }}" placeholder="Masukkan merk Siswa">
+                                <input type="text" class="form-control @error('merk') is-invalid @enderror" name="merk" value="{{ old('merk',$barang->merk) }}">
                             
                                 <!-- error message untuk merk -->
                                 @error('merk')
@@ -26,7 +26,7 @@
 
                             <div class="form-group">
                                 <label class="font-weight-bold">SERI</label>
-                                <input type="text" class="form-control @error('seri') is-invalid @enderror" name="seri" value="{{ old('seri',$barang->seri) }}" placeholder="Masukkan Nomor Induk Siswa">
+                                <input type="text" class="form-control @error('seri') is-invalid @enderror" name="seri" value="{{ old('seri',$barang->seri) }}">
                             
                                 <!-- error message untuk seri -->
                                 @error('seri')
@@ -38,7 +38,7 @@
 
                             <div class="form-group">
                                 <label class="font-weight-bold">SPESIFIKASI</label>
-                                <input type="text" class="form-control @error('spesifikasi') is-invalid @enderror" name="spesifikasi" value="{{ old('spesifikasi',$barang->spesifikasi) }}" placeholder="Masukkan Nomor Induk Siswa">
+                                <input type="text" class="form-control @error('spesifikasi') is-invalid @enderror" name="spesifikasi" value="{{ old('spesifikasi',$barang->spesifikasi) }}">
                             
                                 <!-- error message untuk spesifikasi -->
                                 @error('spesifikasi')
@@ -50,7 +50,7 @@
 
                             <div class="form-group">
                                 <label class="font-weight-bold">STOK</label>
-                                <input type="text" class="form-control @error('stok') is-invalid @enderror" name="stok" value="{{ old('stok',$barang->stok) }}" placeholder="Masukkan Nomor Induk Siswa">
+                                <input type="text" class="form-control @error('stok') is-invalid @enderror" name="stok" value="{{ old('stok',$barang->stok) }}">
                             
                                 <!-- error message untuk stok -->
                                 @error('stok')
@@ -62,7 +62,7 @@
 
                             <div class="form-group">
                                 <label class="font-weight-bold">KATEGORI</label>
-                                <input type="text" class="form-control @error('kategori_id') is-invalid @enderror" name="kategori_id" value="{{ old('kategori_id',$barang->kategori_id) }}" placeholder="Masukkan Nomor Induk Siswa">
+                                <input type="text" class="form-control @error('kategori_id') is-invalid @enderror" name="kategori_id" value="{{ old('kategori_id',$barang->kategori_id) }}">
                             
                                 <!-- error message untuk kategori_id -->
                                 @error('kategori_id')
