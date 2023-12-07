@@ -62,7 +62,11 @@
 
                             <div class="form-group">
                                 <label class="font-weight-bold">KATEGORI</label>
-                                <input type="text" class="form-control @error('kategori_id') is-invalid @enderror" name="kategori_id" value="{{ old('kategori_id',$barang->kategori_id) }}">
+                                <select name="kategori_id" class="form-control">
+                                    @foreach ($Kategori as $rowKategori)
+                                        <option value="{{$rowKategori->id}}">{{$rowKategori->kategori}}</option>
+                                    @endforeach
+                                </select>
                             
                                 <!-- error message untuk kategori_id -->
                                 @error('kategori_id')

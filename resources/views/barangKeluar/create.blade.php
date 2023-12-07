@@ -36,7 +36,11 @@
 
                             <div class="form-group">
                                 <label class="font-weight-bold">NAMA BARANG</label>
-                                <input type="text" class="form-control @error('barang_id') is-invalid @enderror" name="barang_id" value="{{ old('barang_id') }}" placeholder="Masukkan barang">
+                                <select name="barang_id" class="form-control">
+                                    @foreach ($Barang as $rowBarang)
+                                        <option value="{{$rowBarang->id}}">{{$rowBarang->merk}}</option>
+                                    @endforeach
+                                </select>
                                 
                                 <!-- error message untuk barang_id -->
                                 @error('barang_id')

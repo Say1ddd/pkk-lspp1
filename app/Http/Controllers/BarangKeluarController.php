@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Barang;
 use App\Models\BarangKeluar;
 use Illuminate\Http\Request;
 
@@ -13,7 +14,7 @@ class BarangKeluarController extends Controller
     public function index()
     {
 
-        $barangKeluar = BarangKeluar::latest()->paginate(10);
+        $barangKeluar = BarangKeluar::all();
 
         return view('barangkeluar.index',compact('barangKeluar'));
         return DB::table('barangkeluar')->get();
@@ -25,7 +26,8 @@ class BarangKeluarController extends Controller
      */
     public function create()
     {
-        return view('barangkeluar.create');
+        $Barang = Barang::all();
+        return view('barangkeluar.create',compact('Barang'));
     }
 
     /**

@@ -34,7 +34,7 @@
                                     <td class="text-center"> 
                                         <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('barangkeluar.destroy', $barangkeluar->id) }}" method="POST">
                                             <a href="{{ route('barangkeluar.show', $barangkeluar->id) }}" class="btn btn-sm btn-dark"><i class="fa fa-eye"></i></a>
-                                            <a href="{{ route('barangkeluar.edit', $barangkeluar->id) }}" class="btn btn-sm btn-primary"><i class="fa fa-pencil-alt"></i></a>
+                                            {{-- <a href="{{ route('barangkeluar.edit', $barangkeluar->id) }}" class="btn btn-sm btn-primary"><i class="fa fa-pencil-alt"></i></a> --}}
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>

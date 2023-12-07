@@ -26,7 +26,7 @@
                                 <label class="font-weight-bold">KATEGORI</label>
                                 
                                 <div class="form-check">
-                                    <select class="form-select" name="kategori" aria-label="Default select example">
+                                    <select class="form-control" name="kategori">
                                         <option value="BHP" disabled selected>Pilih Kategori</option>
                                         <option value="M">M - Modal</option>
                                         <option value="A">A - Alat</option>

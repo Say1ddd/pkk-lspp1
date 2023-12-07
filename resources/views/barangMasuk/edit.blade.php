@@ -27,7 +27,7 @@
                             <div class="form-group">
                                 <label class="font-weight-bold">Jumlah Barang Masuk</label>
                                 <input type="text" class="form-control @error('qty_masuk') is-invalid @enderror" name="qty_masuk" value="{{ old('qty_masuk',$barangmasuk->qty_masuk) }}">
-                            
+
                                 <!-- error message untuk qty_masuk -->
                                 @error('qty_masuk')
                                     <div class="alert alert-danger mt-2">
