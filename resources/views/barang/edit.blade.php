@@ -15,64 +15,53 @@
                             <div class="form-group">
                                 <label class="font-weight-bold">MERK</label>
                                 <input type="text" class="form-control @error('merk') is-invalid @enderror" name="merk" value="{{ old('merk',$barang->merk) }}">
-                            
-                                <!-- error message untuk merk -->
-                                @error('merk')
-                                    <div class="alert alert-danger mt-2">
-                                        {{ $message }}
-                                    </div>
+
+                                @error('')
+                                    <div class="alert alert-danger mt-2"></div>
                                 @enderror
                             </div>
 
                             <div class="form-group">
                                 <label class="font-weight-bold">SERI</label>
                                 <input type="text" class="form-control @error('seri') is-invalid @enderror" name="seri" value="{{ old('seri',$barang->seri) }}">
-                            
-                                <!-- error message untuk seri -->
-                                @error('seri')
-                                    <div class="alert alert-danger mt-2">
-                                        {{ $message }}
-                                    </div>
+
+                                @error('')
+                                    <div class="alert alert-danger mt-2"></div>
                                 @enderror
                             </div>
 
                             <div class="form-group">
                                 <label class="font-weight-bold">SPESIFIKASI</label>
                                 <input type="text" class="form-control @error('spesifikasi') is-invalid @enderror" name="spesifikasi" value="{{ old('spesifikasi',$barang->spesifikasi) }}">
-                            
-                                <!-- error message untuk spesifikasi -->
-                                @error('spesifikasi')
-                                    <div class="alert alert-danger mt-2">
-                                        {{ $message }}
-                                    </div>
+
+                                @error('')
+                                    <div class="alert alert-danger mt-2"></div>
                                 @enderror
                             </div>
 
                             <div class="form-group">
                                 <label class="font-weight-bold">STOK</label>
-                                <input type="text" class="form-control @error('stok') is-invalid @enderror" name="stok" value="{{ old('stok',$barang->stok) }}">
-                            
-                                <!-- error message untuk stok -->
-                                @error('stok')
-                                    <div class="alert alert-danger mt-2">
-                                        {{ $message }}
-                                    </div>
+                                <input type="text" class="form-control @error('stok') is-invalid @enderror" readonly name="stok" value="{{ old('stok',$barang->stok) }}">
+
+                                @error('')
+                                    <div class="alert alert-danger mt-2"></div>
                                 @enderror
                             </div>
 
                             <div class="form-group">
-                                <label class="font-weight-bold">KATEGORI</label>
-                                <select name="kategori_id" class="form-control">
+                                <label class="font-weight-bold">DESKRIPSI KATEGORI</label>
+                                <select class="form-control @error('kategori_id') is-invalid @enderror" name="kategori_id">
                                     @foreach ($Kategori as $rowKategori)
-                                        <option value="{{$rowKategori->id}}">{{$rowKategori->kategori}}</option>
+                                        <option value="{{ $rowKategori->id }}" {{ (old('kategori_id', $rowKategori->kategori_id) == $rowKategori->id) ? 'selected' : '' }}>
+                                            {{ $rowKategori->deskripsi }}
+                                        </option>
                                     @endforeach
                                 </select>
                             
-                                <!-- error message untuk kategori_id -->
+                                {{-- <input type="hidden" name="kategori_id" value="{{ old('kategori_id', $rowKategori->kategori_id) }}"> --}}
+                            
                                 @error('kategori_id')
-                                    <div class="alert alert-danger mt-2">
-                                        {{ $message }}
-                                    </div>
+                                    <div class="alert alert-danger mt-2">{{ $message }}</div>
                                 @enderror
                             </div>
 

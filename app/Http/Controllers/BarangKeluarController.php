@@ -26,8 +26,8 @@ class BarangKeluarController extends Controller
      */
     public function create()
     {
-        $Barang = Barang::all();
-        return view('barangkeluar.create',compact('Barang'));
+        $barangs = Barang::all();
+        return view('barangkeluar.create', compact('barangs'));
     }
 
     /**
@@ -36,14 +36,25 @@ class BarangKeluarController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'tgl_keluar' => 'required',
-            'qty_keluar' => 'required',
-            'barang_id' => 'required',
+            'tgl_keluar'  => 'required|date',
+            'qty_keluar'  => 'required|integer|min:1',
+            'barang_id'   => 'required|exists:barang,id',
         ]);
 
-        BarangKeluar::create($request->all());
+        $barang = Barang::findOrFail($request->barang_id);
 
-        // Redirect to index
+        if ($request->qty_keluar > $barang->stok) {
+            return back()->with(['fail' => 'Jumlah barang keluar melebihi stok yang tersedia.']);
+        }
+
+        BarangKeluar::create([
+            'tgl_keluar' => $request->tgl_keluar,
+            'qty_keluar' => $request->qty_keluar,
+            'barang_id'  => $request->barang_id,
+        ]);
+
+        $barang->update(['stok' => $barang->stok - $request->qty_keluar]);
+
         return redirect()->route('barangkeluar.index')->with(['success' => 'Data Berhasil Disimpan!']);
     }
 
@@ -61,8 +72,8 @@ class BarangKeluarController extends Controller
      */
     public function edit(BarangKeluar $barangkeluar)
     {
-        $barang_keluar = BarangKeluar::all();
-        return view('barangkeluar.edit', compact('barangkeluar', 'barang_keluar'));
+        $barangs = Barang::all();
+        return view('barangkeluar.edit', compact('barangkeluar', 'barangs'));
     }
 
     /**
@@ -72,13 +83,34 @@ class BarangKeluarController extends Controller
     {
         $this->validate($request, [
             'tgl_keluar' => 'required',
-            'qty_keluar'  => 'required',
-            'barang_id'  => 'required',
+            'qty_keluar' => [
+                'required',
+                'numeric',
+                function ($attribute, $value, $fail) use ($barangkeluar) {
+                    $sisaStok = $barangkeluar->barang->stok + $barangkeluar->qty_keluar;
+    
+                    if ($value > $sisaStok) {
+                        $fail("Jumlah melebihi batas stok tersedia! stok tersedia $sisaStok.");
+                    }
+                },
+            ],
+            'barang_id' => 'required',
         ]);
     
+        $realQtyKeluar = $barangkeluar->qty_keluar;
+    
         $barangkeluar->update($request->all());
+    
+        $perbedaanStok = $realQtyKeluar - $request->qty_keluar;
+    
+        $barang = $barangkeluar->barang;
+        $barang->stok += $perbedaanStok;
+        $barang->save();
+    
         return redirect()->route('barangkeluar.index')->with(['success' => 'Data Berhasil Diubah!']);
     }
+    
+    
 
     /**
      * Remove the specified resource from storage.

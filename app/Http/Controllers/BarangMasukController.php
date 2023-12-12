@@ -26,8 +26,8 @@ class BarangMasukController extends Controller
      */
     public function create()
     {
-        $Barang = Barang::all();
-        return view('barangmasuk.create',compact('Barang'));
+        $barangs = Barang::all();
+        return view('barangmasuk.create', compact('barangs'));
     }
 
     /**
@@ -61,8 +61,8 @@ class BarangMasukController extends Controller
      */
     public function edit(BarangMasuk $barangmasuk)
     {
-        $barang_masuk = BarangMasuk::all();
-        return view('barangmasuk.edit', compact('barangmasuk', 'barang_masuk'));
+        $barangs = Barang::all();
+        return view('barangmasuk.edit', compact('barangmasuk', 'barangs'));
     }
 
     /**

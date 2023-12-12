@@ -15,17 +15,13 @@
                                 <input type="text" class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi" value="{{ old('deskripsi') }}" placeholder="Masukkan deskripsi kategori">
                             
                                 <!-- error message untuk deskripsi -->
-                                @error('deskripsi')
-                                    <div class="alert alert-danger mt-2">
-                                        {{ $message }}
-                                    </div>
+                                @error('')
+                                    <div class="alert alert-danger mt-2"></div>
                                 @enderror
                             </div>
 
                             <div class="form-group">
                                 <label class="font-weight-bold">KATEGORI</label>
-                                
-                                <div class="form-check">
                                     <select class="form-control" name="kategori">
                                         <option value="BHP" disabled selected>Pilih Kategori</option>
                                         <option value="M">M - Modal</option>
@@ -33,10 +29,10 @@
                                         <option value="BHP">BHP - Bahan Habis Pakai</option>
                                         <option value="BTHP">BTHP - Bahan Tidak Habis Pakai</option>
                                     </select>
+                                </select>
 
-                                </div>
                                 <!-- error message untuk kelas -->
-                                @error('kelas')
+                                @error('kategori')
                                     <div class="alert alert-danger mt-2">
                                         {{ $message }}
                                     </div>
