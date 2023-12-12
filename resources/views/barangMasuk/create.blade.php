@@ -13,40 +13,31 @@
                             <div class="form-group">
                                 <label class="font-weight-bold">TANGGAL BARANG MASUK</label>
                                 <input type="date" class="form-control @error('tgl_masuk') is-invalid @enderror" name="tgl_masuk" value="{{ old('tgl_masuk') }}" placeholder="Masukkan tanggal">
-                            
-                                <!-- error message untuk tgl_masuk -->
-                                @error('tgl_masuk')
-                                    <div class="alert alert-danger mt-2">
-                                        {{ $message }}
-                                    </div>
+
+                                @error('')
+                                    <div class="alert alert-danger mt-2"></div>
                                 @enderror
                             </div>
 
                             <div class="form-group">
                                 <label class="font-weight-bold">JUMLAH BARANG MASUK</label>
                                 <input type="text" class="form-control @error('qty_masuk') is-invalid @enderror" name="qty_masuk" value="{{ old('qty_masuk') }}" placeholder="Masukkan jumlah">
-                            
-                                <!-- error message untuk qty_masuk -->
-                                @error('qty_masuk')
-                                    <div class="alert alert-danger mt-2">
-                                        {{ $message }}
-                                    </div>
+
+                                @error('')
+                                    <div class="alert alert-danger mt-2"></div>
                                 @enderror
                             </div>
 
                             <div class="form-group">
-                                <label class="font-weight-bold">NAMA BARANG</label>
+                                <label class="font-weight-bold">SERI BARANG</label>
                                 <select name="barang_id" class="form-control">
-                                    @foreach ($Barang as $rowBarang)
-                                        <option value="{{$rowBarang->id}}">{{$rowBarang->merk}}</option>
+                                    @foreach ($barangs as $rowBarang)
+                                        <option value="{{$rowBarang->id}}">{{$rowBarang->seri}}</option>
                                     @endforeach
                                 </select>
-                                
-                                <!-- error message untuk barang_id -->
-                                @error('barang_id')
-                                    <div class="alert alert-danger mt-2">
-                                        {{ $message }}
-                                    </div>
+
+                                @error('')
+                                    <div class="alert alert-danger mt-2"></div>
                                 @enderror
                             </div>
 
@@ -62,8 +53,7 @@
                                         <option value="XIII">XIII - Tiga Belas</option>
                                     </select>
 
-                                </div>
-                                <!-- error message untuk kelas -->
+                                </div
                                 @error('kelas')
                                     <div class="alert alert-danger mt-2">
                                         {{ $message }}

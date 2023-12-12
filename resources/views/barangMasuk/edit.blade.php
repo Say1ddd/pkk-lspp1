@@ -17,10 +17,8 @@
                                 <input type="date" class="form-control @error('tgl_masuk') is-invalid @enderror" name="tgl_masuk" value="{{ old('tgl_masuk',$barangmasuk->tgl_masuk) }}">
                             
                                 <!-- error message untuk tgl_masuk -->
-                                @error('tgl_masuk')
-                                    <div class="alert alert-danger mt-2">
-                                        {{ $message }}
-                                    </div>
+                                @error('')
+                                    <div class="alert alert-danger mt-2"></div>
                                 @enderror
                             </div>
 
@@ -29,24 +27,28 @@
                                 <input type="text" class="form-control @error('qty_masuk') is-invalid @enderror" name="qty_masuk" value="{{ old('qty_masuk',$barangmasuk->qty_masuk) }}">
 
                                 <!-- error message untuk qty_masuk -->
-                                @error('qty_masuk')
-                                    <div class="alert alert-danger mt-2">
-                                        {{ $message }}
-                                    </div>
+                                @error('')
+                                    <div class="alert alert-danger mt-2"></div>
                                 @enderror
                             </div>
 
                             <div class="form-group">
-                                <label class="font-weight-bold">NAMA BARANG</label>
-                                <input type="text" class="form-control @error('barang_id') is-invalid @enderror" name="barang_id" value="{{ old('barang_id',$barangmasuk->barang_id) }}">
+                                <label class="font-weight-bold">SERI BARANG</label>
+                                <select class="form-control @error('barang_id') is-invalid @enderror" name="barang_id" disabled>
+                                    @foreach ($barangs as $barang)
+                                        <option value="{{ $barang->id }}" {{ (old('barang_id', $barangmasuk->barang_id) == $barang->id) ? 'selected' : '' }}>
+                                            {{ $barang->seri }}
+                                        </option>
+                                    @endforeach
+                                </select>
                             
-                                <!-- error message untuk barang_id -->
+                                <input type="hidden" name="barang_id" value="{{ old('barang_id', $barangmasuk->barang_id) }}">
+                            
                                 @error('barang_id')
-                                    <div class="alert alert-danger mt-2">
-                                        {{ $message }}
-                                    </div>
+                                    <div class="alert alert-danger mt-2">{{ $message }}</div>
                                 @enderror
                             </div>
+                            
 
                             <button type="submit" class="btn btn-md btn-primary">SIMPAN</button>
                             <button type="reset" class="btn btn-md btn-warning">RESET</button>

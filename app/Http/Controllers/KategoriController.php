@@ -2,23 +2,32 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Barang;
+use App\Models\Kategori;
+use App\Models\BarangMasuk;
+use App\Models\BarangKeluar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Models\Kategori;
-use App\Models\Barang;
 
 class KategoriController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+    public function count()
+    {
+        $CountKategori = Kategori::count();
+        $CountBarang = Barang::count();
+        $CountBarangMasuk = BarangMasuk::count();
+        $CountBarangKeluar = BarangKeluar::count();
+
+        return view('dashboard', compact('CountKategori', 'CountBarang', 'CountBarangMasuk', 'CountBarangKeluar'));
+    }
+
     public function index()
     {
-
-        $Kategori = Kategori::latest()->paginate(10);
-
-        return view('kategori.index',compact('Kategori'));
-        return DB::table('kategori')->get();
+        $Kategori = Kategori::all();
+        return view('kategori.index', compact('Kategori'));        
 
     }
 
@@ -87,9 +96,21 @@ class KategoriController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Kategori $kategori)
+    public function destroy($id)
     {
-        $kategori->delete();
-        return redirect()->route('kategori.index')->with(['success' => 'Data Berhasil Dihapus!']);
+        try {
+            $barangCount = Barang::where('kategori_id', $id)->count();
+
+            if ($barangCount > 0) {
+                return back()->with(['fail' => 'Kategori sedang digunakan! Gagal menghapus.']);
+            }
+
+            $kategori = Kategori::findOrFail($id);
+            $kategori->delete();
+
+            return redirect()->route('kategori.index')->with(['success' => 'Data Berhasil Dihapus!']);
+        } catch (QueryException $e) {
+            throw $e;
+        }
     }
 }

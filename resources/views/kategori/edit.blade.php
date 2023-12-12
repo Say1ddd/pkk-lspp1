@@ -15,31 +15,27 @@
                             <div class="form-group">
                                 <label class="font-weight-bold">DESKRIPSI</label>
                                 <input type="text" class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi" value="{{ old('deskripsi',$kategori->deskripsi) }}">
-                            
-                                <!-- error message untuk deskripsi -->
+
                                 @error('deskripsi')
-                                    <div class="alert alert-danger mt-2">
-                                        {{ $message }}
-                                    </div>
+                                    <div class="alert alert-danger mt-2"></div>
                                 @enderror
                             </div>
 
                             <div class="form-group">
                                 <label class="font-weight-bold">KATEGORI</label>
-                                
-                                <select class="form-select @error('kategori') is-invalid @enderror" name="kategori" aria-label="Default select example">
-                                    <option value="A" {{ (old('kategori', $kategori->kategori) == 'A') ? 'selected' : '' }}>A</option>
-                                    <option value="M" {{ (old('kategori', $kategori->kategori) == 'M') ? 'selected' : '' }}>M</option>
-                                    <option value="BHP" {{ (old('kategori', $kategori->kategori) == 'BHP') ? 'selected' : '' }}>BHP</option>
-                                    <option value="BTHP" {{ (old('kategori', $kategori->kategori) == 'BTHP') ? 'selected' : '' }}>BTHP</option>
+                                <select class="form-control @error('kategori') is-invalid @enderror" name="kategori">
+                                    <option value="A" {{ ($kategori->kategori == 'A') ? 'selected' : '' }}>A - Alat</option>
+                                    <option value="M" {{ ($kategori->kategori == 'M') ? 'selected' : '' }}>M - Modal</option>
+                                    <option value="BHP" {{ ($kategori->kategori == 'BHP') ? 'selected' : '' }}>BHP - Bahan Habis Pakai</option>
+                                    <option value="BTHP" {{ ($kategori->kategori == 'BTHP') ? 'selected' : '' }}>BTHP - Bahan Tidak Habis Pakai</option>
                                 </select>
-                                                                                             
+                            
                                 @error('kategori')
                                     <div class="alert alert-danger mt-2">
                                         {{ $message }}
                                     </div>
                                 @enderror
-                            </div>
+                            </div>               
 
                             <button type="submit" class="btn btn-md btn-primary">SIMPAN</button>
                             <button type="reset" class="btn btn-md btn-warning">RESET</button>

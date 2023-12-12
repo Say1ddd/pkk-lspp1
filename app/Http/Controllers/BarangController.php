@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Barang;
 use App\Models\Kategori;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BarangController extends Controller
 {
@@ -31,16 +32,23 @@ class BarangController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'merk'         => 'required',
-            'seri'         => 'required',
-            'spesifikasi'  => 'required',
-            'stok'         => 'nullable|required',
-            'kategori_id'  => 'required',
-        ]);
-
-        Barang::create($request->all());
-        return redirect()->route('barang.index')->with(['success' => 'Data Berhasil Disimpan!']);
+        try {
+            $this->validate($request, [
+                'merk'         => 'required',
+                'seri'         => 'required',
+                'spesifikasi'  => 'required',
+                'kategori_id'  => 'required',
+            ]);
+    
+            $requestData = $request->all();
+            $requestData['stok'] = $request->input('stok', 0);
+    
+            Barang::create($requestData);
+    
+            return redirect()->route('barang.index')->with(['success' => 'Data Berhasil Disimpan!']);
+        } catch (QueryException $e) {
+            return back()->with(['error' => 'Data Gagal Disimpan!']);
+        }
     }
 
     /**
@@ -48,7 +56,6 @@ class BarangController extends Controller
      */
     public function show(Barang $barang)
     {
-        // Return view
         return view('barang.show', compact('barang'));
     }
 
@@ -76,18 +83,20 @@ class BarangController extends Controller
 
         $barang->update($request->all());
 
-        // Redirect to index
         return redirect()->route('barang.index')->with(['success' => 'Data Berhasil Diubah!']);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Barang $barang)
+    public function destroy(string $id)
     {
-        $barang->delete();
-
-        // Redirect to index
-        return redirect()->route('barang.index')->with(['success' => 'Data Berhasil Dihapus!']);
+        if (DB::table('barang_masuk')->where('barang_id', $id)->exists() || DB::table('barang_keluar')->where('barang_id', $id)->exists()) {
+            return redirect()->route('barang.index')->with(['fail' => 'Data Gagal dihapus.']);
+        } else {
+            $Barang = Barang::find($id);
+            $Barang->delete();
+            return redirect()->route('barang.index')->with(['success' => 'Barang sedang digunakan! Gagal menghapus.']);
+        }
     }
 }

@@ -28,9 +28,8 @@
         </div>
         <div class="row">
             <div class="col-md-12  text-center">
-                
 
-                <a href="{{ route('barangmasuk.index') }}" class="btn btn-md btn-primary mb-3">Back</a>
+                <a href="{{ route('barangmasuk.index') }}" class="btn btn-md btn-primary mb-3">Kembali</a>
             </div>
         </div>
     </div>

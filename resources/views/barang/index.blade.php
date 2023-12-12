@@ -6,13 +6,23 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <a href="{{ route('barang.create') }}" class="btn btn-md btn-success">TAMBAH BARANG</a>
-                    </div>
+                <div class="card-body text-center">
+                    <a href="{{ route('barang.create') }}" class="btn btn-md btn-success">TAMBAH BARANG</a>
                 </div>
 
+                @if(session('fail'))
+                    <div class="alert alert-danger">
+                        {{ session('fail') }}
+                    </div>
+                @endif
+
                 @if(count($Barang) > 0)
+                    @if(session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+
                     <table class="table table-bordered">
                         <thead>
                             <tr>
@@ -33,7 +43,7 @@
                                     <td>{{ $barang->seri }}</td>
                                     <td>{{ $barang->spesifikasi }}</td>
                                     <td>{{ $barang->stok }}</td>
-                                    <td>{{ $barang->kategori->kategori }}</td>
+                                    <td>{{ $barang->kategori->deskripsi }}</td>
                                     
                                     <td class="text-center"> 
                                         <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('barang.destroy', $barang->id) }}" method="POST">
@@ -48,8 +58,8 @@
                             @empty
                                 <tr>
                                     <td colspan="7" class="text-center">
-                                        <div class="alert">
-                                            Data barang belum tersedia
+                                        <div class="alert alert-danger">
+                                            {{ session('fail') }}
                                         </div>
                                     </td>
                                 </tr>
@@ -58,11 +68,14 @@
                     </table>
                     {{-- {{ $barang->links() }} --}}
                 @else
-                    <div class="alert">
-                        Data <strong>Barang</strong> kosong.
+                    <div class="row justify-content-center">
+                        <div class="col-md-6">
+                            <div class="alert alert-danger text-center">
+                                Record <strong>Barang</strong> kosong.
+                            </div>
+                        </div>
                     </div>
                 @endif
-
             </div>
         </div>
     </div>
