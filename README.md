@@ -1,1 +1,1 @@
-python itu mapel mpp, bukan pkk
+project pkk
