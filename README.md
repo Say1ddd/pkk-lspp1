@@ -21,7 +21,7 @@ cd path/to/parent/directory
 Clone repository menggunakan perintah git
 
 ```bash
-git clone https://github.com/Say1ddd/pkk-lspp1.git
+git clone https://github.com/Say1ddd/lspp1.git
 ```
 
 Install package yang diperlukan
@@ -42,7 +42,7 @@ Generate key aplikasi laravel
 php artisan key:generate
 ```
 
-Migrasi tabel migration (pastikan database user telah memiliki akses ALL PRIVILEGES dan SUPER sebelum menjalankan migrasi)
+Migrasi tabel (pastikan database user telah memiliki akses ALL PRIVILEGES dan SUPER sebelum menjalankan migrasi)
 
 ```bash
 php artisan migrate
