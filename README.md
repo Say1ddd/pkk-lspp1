@@ -21,7 +21,7 @@ cd path/to/parent/directory
 Clone repository menggunakan perintah git
 
 ```bash
-git clone https://github.com/Say1ddd/lspp1.git
+git clone https://github.com/Say1ddd/pkk-lspp1.git
 ```
 
 Install package yang diperlukan
